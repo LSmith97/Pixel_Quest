@@ -5,8 +5,10 @@
 A simple brower RPG a la classic final fantasy games, minus the overworld (so just encounter to encounter)
 
 ## Wireframe
-
-![mockup](../assets/Wireframe_Mockup.PNG)
+Mock Up:
+![mockup](../assets/wireframe-mockup.PNG)
+Html:
+![wireframe](../assets/wireframe-screenshot.PNG)
 
 ## Psuedocode
 
