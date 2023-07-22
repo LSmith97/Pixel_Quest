@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    height: 98vmin;
+    gap: 5px;
+}
+
+header {
+    flex: .25;
+    width: 80%;
+    min-width: 750px;
+
+    background-color: rgb(207, 226, 243);
+}
+
+.field {
+    flex: 3;
+    width: 80%;
+    min-width: 750px;
+
+    background-color: rgb(217, 234, 211);
+
+    display: grid;
+    gap: 10px;
+    grid-template: 
+    " . . score . . " 1fr
+    " . hero . encounter . " 3fr
+    " . message message message . " 1fr
+    / .5fr 1fr 1fr 1fr .5fr; 
+}
+
+#score {
+    grid-area: score;
+}
+
+#hero-container {
+    grid-area: hero;
+
+    background-color: rgb(217, 210, 233);
+}
+
+#encounter-container {
+    grid-area: encounter;
+
+    background-color: rgb(217, 210, 233);
+}
+
+#message {
+    grid-area: message
+}
+
+.bottom {
+    flex: 2;
+    width: 80%;
+    min-width: 750px;
+
+    background-color: rgb(230, 184, 175);
+
+    padding: 10px;
+    display: grid;
+    gap: 10px;
+    grid-template: 
+    " xp xp xp " 1fr
+    " stats abilities encounter " 6fr
+    / 1fr 1fr 1fr;
+}
+
+.bottom * {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    border-radius: 10px;;
+}
+
+#xp {
+    grid-area: xp;
+
+    background-color: rgb(255, 242, 204);
+}
+
+#player-stats {
+    grid-area: stats;
+
+    background-color: rgb(255, 212, 194);
+}
+
+#actions {
+    grid-area: abilities;
+
+    background-color: rgb(255, 212, 194);
+}
+
+#abilities > button {
+    background-color: rgb(234, 209, 220);
+}
+
+#enemy-stats {
+    grid-area: encounter;
+
+    background-color: rgb(255, 212, 194);
+}
