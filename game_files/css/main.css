@@ -4,6 +4,11 @@
     font-family: Helvetica, sans-serif;
 }
 
+.hidden {
+    display: none;
+    visibility: collapse;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -11,6 +16,8 @@ body {
     align-content: center;
     height: 98vmin;
     gap: 5px;
+
+    background-color: rgb(33, 33, 33);
 }
 
 header {
@@ -54,7 +61,7 @@ header {
 }
 
 #message {
-    grid-area: message
+    grid-area: message;
 }
 
 .bottom {
@@ -80,10 +87,13 @@ header {
     border-radius: 10px;;
 }
 
-#xp {
+#xp-bar {
     grid-area: xp;
 
     background-color: rgb(255, 242, 204);
+
+    flex-direction: row;
+    justify-content: center;
 }
 
 #player-stats {

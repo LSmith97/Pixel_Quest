@@ -4,7 +4,8 @@ Project Description
 
 ## Gameplay - Screenshots
 
-![mockup](assets/Wireframe_Mockup.PNG)
+![wireframe](assets/wireframe-screenshot.PNG)
+
 ## Technologies Used
 
 - HTML
