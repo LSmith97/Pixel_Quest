@@ -1,7 +1,7 @@
   /*----- constants -----*/
   class Hero {
     constructor() {
-        this.level = 0;
+        this.level = 1;
         this.xp = 0;
         this.atk = 5;
         this.def = 5
@@ -21,6 +21,24 @@
             {name: 'Spirit Bomb',
              damage: 15,
             cost: -10},
+        ]
+    }
+  }
+
+  class Enemy {
+    constructor() {
+        this.name = 'Goblin';
+        this.atk = 5;
+        this.def = 5
+        this.maxHP = 10;
+
+        this.abilities = [
+            {name: 'Gobsmack',
+            damage: 5},
+
+            {name: 'Poison Arrow',
+            damage: 10},
+
         ]
     }
   }
