@@ -232,6 +232,8 @@ function init() { //Initializes the starting game state
 
     encounterBtn.addEventListener('click', findEncounter);
 
+    resetBtn.addEventListener(`click`, init);
+
     // Render state to the page
     render();
 }
@@ -317,6 +319,9 @@ function levelUp(){ // TODO: If the player has enough XP to level up, increase t
     //TODO
 }
 
-function gameOver(){ // TODO: determine if the player has been defeated
-    //TODO
+function gameOver(){ // Determines if the player has been defeated
+    if (player.hp <= 0){
+        message += " Your hp is 0!"
+        isGameOver = true;
+    }
 }
