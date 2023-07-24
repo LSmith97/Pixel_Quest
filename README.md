@@ -11,6 +11,7 @@ Project Description
 - HTML
 - CSS
 - JS
+- Art by: https://anokolisa.itch.io/
 
 ## Key Resources
 

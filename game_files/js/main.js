@@ -64,9 +64,10 @@ class Hero {
             // If the enemy is defeated:
             // Display victory message
             message += ` You defeated the ${encounter.name}!`;
-            // Increase player gold and xp
+            // Increase player gold, xp, and score
             player.gold += encounter.gold;
             player.xp += encounter.xp;
+            player.score++;
             // check for level up
             levelUp();
             // Set inCombat to false
@@ -84,8 +85,8 @@ class Enemy {
 
         this.atk = 5;
         this.def = 5
-        this.maxHP = 10;
-        this.hp = 10;
+        this.maxHP = 15;
+        this.hp = 15;
 
         this.xp = 25;
         this.gold = 25;
@@ -102,7 +103,7 @@ class Enemy {
     fight() {   // Uses a random ability and decreases player hp accordingly
         // Chose a random ability to fight with
         let idx = Math.floor( Math.random() * encounter.abilities.length)
-        let damage = encounter.abilities[idx]['damage'];
+        let damage = encounter.abilities[idx]['damage'] - player.def + encounter.atk;
         let name = encounter.abilities[idx]['name'];
         //Lower HP and display a message based on the attack used
         player.hp -= damage;
@@ -131,18 +132,25 @@ class Encounter{
                     player.mana = player.maxMana;
                 };
                 break;
-            case (encounterRoll >= 60 && encounterRoll < 80):
-                this.type = "Pitfall"
-                this.message = "You fell into a trap! You took 5 damage!"
+            case (encounterRoll >= 60 && encounterRoll < 70):
+                this.type = "Pitfall";
+                this.message = "You fell into a trap! You took 5 damage!";
                 this.effect = function(){
                     player.hp -= 5;
                 };
                 break;
-            case (encounterRoll >= 80):
-                this.type = "Bag o' Gold"
-                this.message = "You found a bag of gold on the side of the road. Gold +5!"
+            case (encounterRoll >= 80 && encounterRoll < 95):
+                this.type = "Bag o' Gold";
+                this.message = "You found a bag of gold on the side of the road. Gold +5!";
                 this.effect = function(){
                     player.gold += 5;
+                };
+                break;
+            case (encounterRoll > 95):
+                this.type = "Rare Weapon";
+                this.message = "You found a rare and powerful weapon in a chest. Your attack was increased";
+                this.effect = function(){
+                    player.atk += 2;
                 };
                 break;
         }
@@ -269,6 +277,8 @@ function renderField() { // Renders the field, including score and message
     } else {
         encounterImgEl.classList.remove('hidden');
     }
+
+    heroImgEl.innerHTML = `<img src="images/character.png" alt="">`
 }
 
 function renderXP() { // Renders the XP bar
@@ -330,8 +340,8 @@ function levelUp(){ // If the player has enough XP to level up, increase their s
         player.maxMana += 5;
         player.hp = player.maxHP;
         player.mana = player.maxMana;
-        player.atk += Math.floor(Math.random() * MAX_STAT_PER_LEVEL);
-        player.def += Math.floor(Math.random() * MAX_STAT_PER_LEVEL);
+        player.atk += Math.floor(Math.random() * MAX_STAT_PER_LEVEL) + 1;
+        player.def += Math.floor(Math.random() * MAX_STAT_PER_LEVEL) + 1;
    }
 }
 
