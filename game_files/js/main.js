@@ -105,32 +105,39 @@ class Enemy {
     }
 }
 
- // Define a table of encounters
- const encounterTable = [
-    {type: "Bag o' Gold", 
-    message: "You found a bag of gold on the side of the road. Gold +5!",
-    effect: function(){
-        player.gold += 5;
-        },
-    },
+class Encounter{
+    constructor(){
+        const encounterRoll = Math.floor(Math.random() * 100);
 
-    {type: "Inn",
-    message: "You find a place to rest and recover. HP and Mana refreshed!",
-    effect: function(){
-        player.hp = player.maxHP;
-        player.mana = player.maxMana;
-        },
-    },
-
-    {type: "Pitfall", 
-    message: "You fell into a trap! You took 5 damage!",
-    effect: function(){
-        player.hp -= 5;
-        },
-    },
-
-    {type: "enemy"},
-]
+        switch (true) {
+            case (encounterRoll < 50):
+                this.type = 'enemy';
+                break;
+            case (encounterRoll >= 50 && encounterRoll < 60):
+                this.type = 'Inn';
+                this.message = "You find a place to rest and recover. HP and Mana refreshed!";
+                this.effect = function(){
+                    player.hp = player.maxHP;
+                    player.mana = player.maxMana;
+                };
+                break;
+            case (encounterRoll >= 60 && encounterRoll < 70):
+                this.type = "Pitfall"
+                this.message = "You fell into a trap! You took 5 damage!"
+                this.effect = function(){
+                    player.hp -= 5;
+                };
+                break;
+            case (encounterRoll >= 70):
+                this.type = "Bag o' Gold"
+                this.message = "You found a bag of gold on the side of the road. Gold +5!"
+                this.effect = function(){
+                    player.gold += 5;
+                };
+                break;
+        }
+    }
+}
 
   /*----- state variables -----*/
 
@@ -170,11 +177,10 @@ const encounterBtn = document.querySelector("#encounter-button");
 
   /*----- event listeners -----*/
 
-function findEncounter() {
-   
+function findEncounter() { // Gets a new encounter instance
 
-    // Choose a random encounter from the encounter table
-    encounter = encounterTable[Math.floor(Math.random() * encounterTable.length)];
+    // Create a new encounter instance
+    encounter = new Encounter;
 
     // If that encounter is an enemy, create a new Enemy instance and enter combat
     if(encounter.type === 'enemy'){
@@ -182,7 +188,7 @@ function findEncounter() {
         encounter = new Enemy;
         message = `You're stopped by a ${encounter.name}!`;
     } else {
-        // Otherwise, 
+        // Otherwise, display a message and do an effect based on the current encounter
         message = encounter.message;
         encounter.effect();
     }
@@ -194,7 +200,7 @@ function findEncounter() {
 
 init();
 
-function init() {
+function init() { //Initializes the starting game state
     // Create a new Hero
     player = new Hero();
 
@@ -214,6 +220,7 @@ function init() {
     render();
 }
 
+// Render Functions:
 function render(){ // Renders HTML elements
     renderStats();
     renderField();
@@ -278,6 +285,11 @@ function renderEncounter() { // Renders enemy stats
     }
 }
 
-function levelUp(){ // If the player has enough XP to level up, increase their stats and reset xp to 0
+// Game state functions:
+function levelUp(){ // TODO: If the player has enough XP to level up, increase their stats and reset xp to 0
+    //TODO
+}
+
+function gameOver(){ // TODO: determine if the player has been defeated
     //TODO
 }
