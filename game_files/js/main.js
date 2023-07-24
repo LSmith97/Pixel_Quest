@@ -14,39 +14,62 @@ class Hero {
 
         this.gold = 0;
         this.score = 0;
-
-        this.abilities = [
-            {name: 'Slash',
-            target: encounter,
-            damage: 5,
-            cost: 5},
-
-            {name: 'Fireball',
-            target: encounter,
-            damage: 10,
-            cost: -5},
-
-            {name: 'Spirit Bomb',
-            target: encounter,
-            damage: 15,
-            cost: -10},
-        ];
     }
 
-    fight(evt){
+    abilities = [
+        {name: 'Slash',
+        target: 'enemy',
+        damage: 5,
+        cost: 0},
+
+        {name: 'Fireball',
+        target: 'enemy',
+        damage: 10,
+        cost: 5},
+
+        {name: 'Spirit Bomb',
+        target: 'enemy',
+        damage: 15,
+        cost: 10},
+    ];
+
+    fight(evt){ // Lowers enemy stats and player mana depending on ability used
         let idx = evt.target.id;
-        let target = this.abilities[idx]['target'];
-        let damage = this.abilities[idx]['damage'];
-        let cost = this.abilities[idx]['cost'];
+        let damage = player.abilities[idx]['damage'];
+        let cost = player.abilities[idx]['cost'];
+        let target;
+
+        if (cost > player.mana) {
+            message = "You don't have enough mana to use that!"
+            render();
+            return;
+        }
+        // If the target property of the ability is 'enemy' set the target to be the current encounter object
+        // If the target property of the ability is 'self' set the target to be the player object
+        if (player.abilities[idx]['target'] === 'enemy'){
+            target = encounter;
+        } else if (player.abilities[idx]['target'] === 'self'){
+            target = player;
+        }
 
         target.hp -= damage;
-        this.mana += cost;
+        player.mana -= cost;
 
         if(encounter.hp > 0){
+            // If the enemy isn't defeated, they fight back
             encounter.fight();
         } else {
-            message = `You defeated the ${target.name}!`
+            // If the enemy is defeated:
+            // Display victory message
+            message = `You defeated the ${encounter.name}!`;
+            // Increase player gold and xp
+            player.gold += encounter.gold;
+            player.xp += encounter.xp;
+            // check for level up
+            levelUp();
+            // Set inCombat to false
             inCombat = false;
+            //Render
             render();
         }
     }
@@ -59,8 +82,8 @@ class Enemy {
 
         this.atk = 5;
         this.def = 5
-        this.maxHP = 15;
-        this.hp = 15;
+        this.maxHP = 20;
+        this.hp = 20;
 
         this.xp = 25;
         this.gold = 25;
@@ -73,14 +96,48 @@ class Enemy {
             damage: 10},
         ];
     }
+
+    fight() {
+        //TODO
+        console.log("The enemy fights back");
+
+        render();
+    }
 }
+
+ // Define a table of encounters
+ const encounterTable = [
+    {type: "Bag o' Gold", 
+    message: "You found a bag of gold on the side of the road. Gold +5!",
+    effect: function(){
+        player.gold += 5;
+        },
+    },
+
+    {type: "Inn",
+    message: "You find a place to rest and recover. HP and Mana refreshed!",
+    effect: function(){
+        player.hp = player.maxHP;
+        player.mana = player.maxMana;
+        },
+    },
+
+    {type: "Pitfall", 
+    message: "You fell into a trap! You took 5 damage!",
+    effect: function(){
+        player.hp -= 5;
+        },
+    },
+
+    {type: "enemy"},
+]
 
   /*----- state variables -----*/
 
-let player;
+let player; 
 let encounter;
-let message;
-let inCombat;
+let message; // The message that displays onscreen to the player
+let inCombat; // Boolean, changes displayed elements based on whether the player is in a fight currently
 
 
   /*----- cached elements  -----*/
@@ -103,15 +160,34 @@ const xpEl = document.querySelector('#xp-bar p')
 
 // encounter stat elements
 const typeEl = document.querySelector('#type');
+const enemyHpEl = document.querySelector('#enemy-hp');
+const enemyAtkEl = document.querySelector('#enemy-atk');
+const enemyDefEl = document.querySelector('#enemy-def')
 
-// buttons
+// button elements
 const abilityBtns =  document.querySelectorAll('.ability-button');
 const encounterBtn = document.querySelector("#encounter-button");
 
   /*----- event listeners -----*/
 
 function findEncounter() {
-    console.log('Finding Encounter');
+   
+
+    // Choose a random encounter from the encounter table
+    encounter = encounterTable[Math.floor(Math.random() * encounterTable.length)];
+
+    // If that encounter is an enemy, create a new Enemy instance and enter combat
+    if(encounter.type === 'enemy'){
+        inCombat = true;
+        encounter = new Enemy;
+        message = `You're stopped by a ${encounter.name}!`;
+    } else {
+        // Otherwise, 
+        message = encounter.message;
+        encounter.effect();
+    }
+    //Render
+    render();
 }
 
   /*----- functions -----*/
@@ -188,9 +264,20 @@ function renderActions() { // Renders the action buttons
 }
 
 function renderEncounter() { // Renders enemy stats
-    typeEl.textContent = `Type: ${encounter.type}`
-    if (encounter.type !== 'enemy') {
-        //only display encounter type
+    // If the encounter isn't an enemy, hide the other stats. Otherwise, display all stats
+    if (encounter.type !== 'enemy'){
+        typeEl.textContent = `${encounter.type}`;
+        enemyHpEl.textContent = '';
+        enemyAtkEl.textContent = '';
+        enemyDefEl.textContent = '';
+    } else {
+        typeEl.textContent = `Name: ${encounter.name}`;
+        enemyHpEl.textContent = `Health: ${encounter.hp}/${encounter.maxHP}`;
+        enemyAtkEl.textContent = `Attack: ${encounter.atk}`;
+        enemyDefEl.textContent = `Defense: ${encounter.def}`
     }
 }
 
+function levelUp(){ // If the player has enough XP to level up, increase their stats and reset xp to 0
+    //TODO
+}
