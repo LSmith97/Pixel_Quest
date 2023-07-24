@@ -37,31 +37,33 @@ class Hero {
         let idx = evt.target.id;
         let damage = player.abilities[idx]['damage'];
         let cost = player.abilities[idx]['cost'];
-        let target;
+        let name = player.abilities[idx]['name'];
 
+        // If the mana cost is greater than current mana, display a message and return
         if (cost > player.mana) {
             message = "You don't have enough mana to use that!"
             render();
             return;
         }
-        // If the target property of the ability is 'enemy' set the target to be the current encounter object
-        // If the target property of the ability is 'self' set the target to be the player object
+        
         if (player.abilities[idx]['target'] === 'enemy'){
-            target = encounter;
+            // If the target property of the ability is 'enemy' decrease encounter hp
+            damage = damage + player.atk - encounter.def;
+            encounter.hp -= damage;
         } else if (player.abilities[idx]['target'] === 'self'){
-            target = player;
+            // If the target property of the ability is 'self' increase player hp
+            player.hp += damage;
         }
-
-        target.hp -= damage;
+        // Decrease mana by the ability cost
         player.mana -= cost;
-
+        message = `You used ${name}. ${encounter.name} took ${damage} damage!`
         if(encounter.hp > 0){
             // If the enemy isn't defeated, they fight back
             encounter.fight();
         } else {
             // If the enemy is defeated:
             // Display victory message
-            message = `You defeated the ${encounter.name}!`;
+            message += ` You defeated the ${encounter.name}!`;
             // Increase player gold and xp
             player.gold += encounter.gold;
             player.xp += encounter.xp;
@@ -97,18 +99,26 @@ class Enemy {
         ];
     }
 
-    fight() {
-        //TODO
-        console.log("The enemy fights back");
-
+    fight() {   // Uses a random ability and decreases player hp accordingly
+        // Chose a random ability to fight with
+        let idx = Math.floor( Math.random() * encounter.abilities.length)
+        let damage = encounter.abilities[idx]['damage'];
+        let name = encounter.abilities[idx]['name'];
+        //Lower HP and display a message based on the attack used
+        player.hp -= damage;
+        message += ` ${encounter.name} used ${name}. You took ${damage} damage!`;
+        // Check for a game over
+        gameOver();
+        // Render
         render();
     }
 }
 
 class Encounter{
     constructor(){
+        // Generate a random number 0-100
         const encounterRoll = Math.floor(Math.random() * 100);
-
+        // Create the encounter based on the number rolled
         switch (true) {
             case (encounterRoll < 50):
                 this.type = 'enemy';
@@ -121,14 +131,14 @@ class Encounter{
                     player.mana = player.maxMana;
                 };
                 break;
-            case (encounterRoll >= 60 && encounterRoll < 70):
+            case (encounterRoll >= 60 && encounterRoll < 80):
                 this.type = "Pitfall"
                 this.message = "You fell into a trap! You took 5 damage!"
                 this.effect = function(){
                     player.hp -= 5;
                 };
                 break;
-            case (encounterRoll >= 70):
+            case (encounterRoll >= 80):
                 this.type = "Bag o' Gold"
                 this.message = "You found a bag of gold on the side of the road. Gold +5!"
                 this.effect = function(){
@@ -141,11 +151,13 @@ class Encounter{
 
   /*----- state variables -----*/
 
-let player; 
-let encounter;
-let message; // The message that displays onscreen to the player
-let inCombat; // Boolean, changes displayed elements based on whether the player is in a fight currently
+let player; // The player object
+let encounter; // The current encounter object
 
+let message; // The message that displays onscreen to the player
+
+let inCombat; // Boolean, changes displayed elements based on whether the player is in a fight currently
+let isGameOver; // Boolean, changes displayed elements if the player loses
 
   /*----- cached elements  -----*/
 
