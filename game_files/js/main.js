@@ -84,8 +84,8 @@ class Enemy {
 
         this.atk = 5;
         this.def = 5
-        this.maxHP = 20;
-        this.hp = 20;
+        this.maxHP = 10;
+        this.hp = 10;
 
         this.xp = 25;
         this.gold = 25;
@@ -148,6 +148,9 @@ class Encounter{
         }
     }
 }
+
+const XP_PER_LEVEL = 50;
+const MAX_STAT_PER_LEVEL = 3;
 
   /*----- state variables -----*/
 
@@ -269,7 +272,7 @@ function renderField() { // Renders the field, including score and message
 }
 
 function renderXP() { // Renders the XP bar
-    xpEl.textContent = `Current Level: ${player.level} - Current XP: ${player.xp} - To Next Level: ${player.level * 50}`;
+    xpEl.textContent = `Current Level: ${player.level} - Current XP: ${player.xp} - To Next Level: ${player.level * XP_PER_LEVEL}`;
 }
 
 function renderActions() { // Renders the action buttons
@@ -315,8 +318,21 @@ function renderEncounter() { // Renders enemy stats
 }
 
 // Game state functions:
-function levelUp(){ // TODO: If the player has enough XP to level up, increase their stats and reset xp to 0
-    //TODO
+function levelUp(){ // If the player has enough XP to level up, increase their stats and reset xp to 0
+    if (player.xp >= player.level * XP_PER_LEVEL){
+        //reset xp and increase level
+        player.xp = 0;
+        player.level++;
+        // Add a level up message
+        message += " You leveled Up!";
+        // Increase player's stats and refresh hp/mana
+        player.maxHP += 5;
+        player.maxMana += 5;
+        player.hp = player.maxHP;
+        player.mana = player.maxMana;
+        player.atk += Math.floor(Math.random() * MAX_STAT_PER_LEVEL);
+        player.def += Math.floor(Math.random() * MAX_STAT_PER_LEVEL);
+   }
 }
 
 function gameOver(){ // Determines if the player has been defeated
