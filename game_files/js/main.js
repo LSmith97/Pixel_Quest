@@ -186,6 +186,7 @@ const enemyDefEl = document.querySelector('#enemy-def')
 // button elements
 const abilityBtns =  document.querySelectorAll('.ability-button');
 const encounterBtn = document.querySelector("#encounter-button");
+const resetBtn = document.querySelector('#reset-button');
 
   /*----- event listeners -----*/
 
@@ -203,6 +204,8 @@ function findEncounter() { // Gets a new encounter instance
         // Otherwise, display a message and do an effect based on the current encounter
         message = encounter.message;
         encounter.effect();
+        // Check for a game over (some events reduce player HP)
+        gameOver();
     }
     //Render
     render();
@@ -219,6 +222,7 @@ function init() { //Initializes the starting game state
     // Initialize the game state
     message = "You begin your adventure!";
     inCombat = false;
+    isGameOver = false;
     encounter = {type: 'none'};
 
     // add event listeners to buttons
@@ -267,18 +271,29 @@ function renderXP() { // Renders the XP bar
 }
 
 function renderActions() { // Renders the action buttons
-    if (!inCombat) {
-        // when not in combat, show the find encounter button and hide the ability buttons 
+    if(!isGameOver){
+        //If the game isn't over, hide the reset button
+        resetBtn.classList.add('hidden');
+        if (!inCombat) {
+            // when not in combat, show the find encounter button and hide the ability buttons 
+            abilityBtns.forEach(function(element){
+            element.classList.add('hidden');
+            });
+            encounterBtn.classList.remove('hidden');
+        } else {
+            // when in combat, hide the find encounter button and show the ability buttons 
+            abilityBtns.forEach(function(element){
+                element.classList.remove('hidden');
+            });
+            encounterBtn.classList.add('hidden');
+        }
+    } else {
+        // When the game is over, show the reset button and hide all other buttons
         abilityBtns.forEach(function(element){
             element.classList.add('hidden');
-        });
-        encounterBtn.classList.remove('hidden');
-    } else {
-        // when in combat, hide the find encounter button and show the ability buttons 
-        abilityBtns.forEach(function(element){
-            element.classList.remove('hidden');
-        });
+            });
         encounterBtn.classList.add('hidden');
+        resetBtn.classList.remove('hidden');
     }
 }
 
