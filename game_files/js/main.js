@@ -91,6 +91,8 @@ class Enemy {
         this.xp = 25;
         this.gold = 25;
 
+        this.img = 'images/goblin.png';
+
         this.abilities = [
             {name: 'Gobsmack',
             damage: 5},
@@ -277,8 +279,10 @@ function renderField() { // Renders the field, including score and message
     } else {
         encounterImgEl.classList.remove('hidden');
     }
-
-    heroImgEl.innerHTML = `<img src="images/character.png" alt="">`
+    // Render Encounter image
+    encounterImgEl.innerHTML = `<img src="${encounter.img}">`
+    // Render Hero image
+    heroImgEl.innerHTML = `<img src="images/character.png" alt="player">`
 }
 
 function renderXP() { // Renders the XP bar

@@ -50,14 +50,10 @@ header {
 
 #hero-container {
     grid-area: hero;
-
-    background-color: rgb(217, 210, 233);
 }
 
 #encounter-container {
     grid-area: encounter;
-
-    background-color: rgb(217, 210, 233);
 }
 
 #message {
