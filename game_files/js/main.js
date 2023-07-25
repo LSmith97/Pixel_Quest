@@ -80,7 +80,7 @@ class Hero {
 
 class Enemy {
     constructor() {
-        let randomRoll = player.level + Math.floor(Math.random() * 5);
+        let randomRoll = player.level + Math.floor(Math.random() * 4);
         let listIdx;
         switch (true){
             case (randomRoll <= 5):
@@ -117,19 +117,19 @@ class Enemy {
             {name: 'Poison Arrow',
             damage: 10},
         ]],
-        ['Skeleton', 7, 7, 25, 40, 40, 'images/character.png',[
+        ['Skeleton', 7, 7, 25, 50, 50, 'images/skeleton.png',[
             {name: 'Shamble Strike',
             damage: 5},
 
             {name: 'Bone Breaker',
-            damage: 10},
+            damage: 13},
         ]],
-        ['Lich', 10, 10, 30, 65, 65, 'images/character.png',[
+        ['Lich', 15, 15, 40, 100, 100, 'images/lich.png',[
             {name: 'Spooky Blast',
-            damage: 10},
+            damage: 15},
 
             {name: 'Evil Beam',
-            damage: 15},
+            damage: 25},
         ]],
     ]
 
