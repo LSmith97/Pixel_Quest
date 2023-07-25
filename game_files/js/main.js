@@ -49,6 +49,7 @@ class Hero {
         if (player.abilities[idx]['target'] === 'enemy'){
             // If the target property of the ability is 'enemy' decrease encounter hp
             damage = damage + player.atk - encounter.def;
+            if (damage < 1) damage = 1;
             encounter.hp -= damage;
         } else if (player.abilities[idx]['target'] === 'self'){
             // If the target property of the ability is 'self' increase player hp
@@ -80,7 +81,7 @@ class Hero {
 
 class Enemy {
     constructor() {
-        let randomRoll = player.level + Math.floor(Math.random() * 4);
+        let randomRoll = player.level + Math.floor(Math.random() * 5);
         let listIdx;
         switch (true){
             case (randomRoll <= 5):
@@ -137,6 +138,7 @@ class Enemy {
         // Chose a random ability to fight with
         let idx = Math.floor( Math.random() * encounter.abilities.length)
         let damage = encounter.abilities[idx]['damage'] - player.def + encounter.atk;
+        if (damage < 1) damage = 1;
         let name = encounter.abilities[idx]['name'];
         //Lower HP and display a message based on the attack used
         player.hp -= damage;
