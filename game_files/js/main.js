@@ -7,10 +7,10 @@ class Hero {
 
         this.atk = 5;
         this.def = 5
-        this.maxHP = 20;
-        this.hp = 20;
+        this.maxHP = 25;
+        this.hp = this.maxHP;
         this.maxMana = 10;
-        this.mana = 10;
+        this.mana = this.maxMana;
 
         this.gold = 0;
         this.score = 0;
@@ -119,10 +119,10 @@ class Enemy {
         ]],
         ['Skeleton', 7, 7, 25, 50, 50, 'images/skeleton.png',[
             {name: 'Shamble Strike',
-            damage: 5},
+            damage: 10},
 
             {name: 'Bone Breaker',
-            damage: 13},
+            damage: 15},
         ]],
         ['Lich', 15, 15, 40, 100, 100, 'images/lich.png',[
             {name: 'Spooky Blast',

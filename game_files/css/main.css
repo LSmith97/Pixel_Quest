@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     text-align: center;
-    font-family: Helvetica, sans-serif;
+    font-family: 'Silkscreen', cursive;
 }
 
 .hidden {
@@ -25,7 +25,8 @@ header {
     width: 80%;
     min-width: 750px;
 
-    background-color: rgb(207, 226, 243);
+    background-color: rgb(244, 165, 104);
+    border: 7px solid rgb(181, 115, 63);
 }
 
 .field {
@@ -35,14 +36,15 @@ header {
 
     background-color: rgb(33, 33, 33);
     background-image: url('../images/background.png');
-    background-size: 100%;
-    background-position: center;
+    background-position: left 0% bottom 5%;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     display: grid;
     grid-template: 
     " . . score . . " .25fr
     " . hero . encounter . " 3fr
-    " . message message message . " .25fr
+    " message message message message message " .25fr
     / .5fr 1fr 1fr 1fr .5fr; 
 
     color: white;
@@ -68,35 +70,36 @@ header {
     margin: 10px 0 0 0;
 }
 #message * {
-    margin: 0 0 10px 0;
+    margin: 10px 0 10px 0;
+    letter-spacing: -.1em;
 }
 .bottom {
     flex: 2;
     width: 80%;
     min-width: 750px;
 
-    background-color: rgb(230, 184, 175);
+    background-color: rgb(122, 75, 39);
 
     padding: 10px;
     display: grid;
-    gap: 10px;
+    gap: 5px;
     grid-template: 
     " xp xp xp " 1fr
-    " stats abilities encounter " 6fr
+    " stats abilities encounter " 5fr
     / 1fr 1fr 1fr;
 }
 
 .bottom * {
     display: flex;
     flex-direction: column;
-    margin: 5px;
+    margin: 4px;
     border-radius: 10px;;
 }
 
 #xp-bar {
     grid-area: xp;
 
-    background-color: rgb(255, 242, 204);
+    background-color: rgb(255, 225, 0);
 
     flex-direction: row;
     justify-content: center;
@@ -105,21 +108,20 @@ header {
 #player-stats {
     grid-area: stats;
 
-    background-color: rgb(255, 212, 194);
+    background-color: rgb(244, 165, 104);
+    border: 5px solid rgb(181, 115, 63);
 }
 
 #actions {
     grid-area: abilities;
 
-    background-color: rgb(255, 212, 194);
-}
-
-#abilities > button {
-    background-color: rgb(234, 209, 220);
+    background-color: rgb(244, 165, 104);
+    border: 5px solid rgb(181, 115, 63);
 }
 
 #enemy-stats {
     grid-area: encounter;
 
-    background-color: rgb(255, 212, 194);
+    background-color: rgb(244, 165, 104);
+    border: 5px solid rgb(181, 115, 63);
 }
