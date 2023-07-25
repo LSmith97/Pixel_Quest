@@ -129,6 +129,7 @@ class Encounter{
             case (encounterRoll >= 50 && encounterRoll < 60):
                 this.type = 'Inn';
                 this.message = "You find a place to rest and recover. HP and Mana refreshed!";
+                this.img = "images/inn.png";
                 this.effect = function(){
                     player.hp = player.maxHP;
                     player.mana = player.maxMana;
@@ -137,13 +138,15 @@ class Encounter{
             case (encounterRoll >= 60 && encounterRoll < 70):
                 this.type = "Pitfall";
                 this.message = "You fell into a trap! You took 5 damage!";
+                this.img = "images/pitfall.png";
                 this.effect = function(){
                     player.hp -= 5;
                 };
                 break;
             case (encounterRoll >= 80 && encounterRoll < 95):
-                this.type = "Bag o' Gold";
-                this.message = "You found a bag of gold on the side of the road. Gold +5!";
+                this.type = "Teasure";
+                this.message = "You found a chest with some treasure in it. Gold +5!";
+                this.img = "images/chest.png";
                 this.effect = function(){
                     player.gold += 5;
                 };
@@ -151,6 +154,7 @@ class Encounter{
             case (encounterRoll > 95):
                 this.type = "Rare Weapon";
                 this.message = "You found a rare and powerful weapon in a chest. Your attack was increased";
+                this.img = "images/chest.png";
                 this.effect = function(){
                     player.atk += 2;
                 };
