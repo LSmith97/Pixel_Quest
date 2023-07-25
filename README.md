@@ -1,10 +1,10 @@
-# SEI_Project_1
+# Pixel Quest
 
-Project Description
+A browser based RPG game. 
 
 ## Gameplay - Screenshots
 
-![wireframe](assets/wireframe-screenshot.PNG)
+![screenshot](/assets/screenshot.png)
 
 ## Technologies Used
 
@@ -23,6 +23,8 @@ instructions for accessing the deployed game
 
 ## Future Features
 
-1.
-2.
-3.
+1. Audio on ability usage
+2. Background music
+3. Additional player classes with different abilities
+4. Adding the ability to spend gold
+5. Expanding the enemy and encounter lists
