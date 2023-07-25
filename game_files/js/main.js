@@ -303,6 +303,9 @@ function renderActions() { // Renders the action buttons
             // when in combat, hide the find encounter button and show the ability buttons 
             abilityBtns.forEach(function(element){
                 element.classList.remove('hidden');
+                // Display the corresponding ability's text
+                let idx = element.id;
+                element.textContent = `${player.abilities[idx].name}: ${player.abilities[idx].damage} damage, ${player.abilities[idx].cost} mana`
             });
             encounterBtn.classList.add('hidden');
         }
