@@ -87,10 +87,10 @@ class Enemy {
             case (randomRoll <= 5):
                 listIdx = 0;
                 break;
-            case (randomRoll > 5 && randomRoll <= 10):
+            case (randomRoll > 5 && randomRoll <= 8):
                 listIdx = 1;
                 break;
-            case (randomRoll > 10):
+            case (randomRoll > 8):
                 listIdx = 2;
                 break;
         }
