@@ -80,27 +80,58 @@ class Hero {
 
 class Enemy {
     constructor() {
+        let randomRoll = player.level + Math.floor(Math.random() * 5);
+        let listIdx;
+        switch (true){
+            case (randomRoll <= 5):
+                listIdx = 0;
+                break;
+            case (randomRoll > 5 && randomRoll <= 10):
+                listIdx = 1;
+                break;
+            case (randomRoll > 10):
+                listIdx = 2;
+                break;
+        }
+        console.log(listIdx)
         this.type = 'enemy';
-        this.name = 'Goblin';
+        this.name = Enemy.enemyList[listIdx][0];
 
-        this.atk = 5;
-        this.def = 5
-        this.maxHP = 15;
-        this.hp = 15;
+        this.atk = Enemy.enemyList[listIdx][1];
+        this.def = Enemy.enemyList[listIdx][2];
+        this.maxHP = Enemy.enemyList[listIdx][3];
+        this.hp = this.maxHP
 
-        this.xp = 25;
-        this.gold = 25;
+        this.xp = Enemy.enemyList[listIdx][4];
+        this.gold = Enemy.enemyList[listIdx][5];
 
-        this.img = 'images/goblin.png';
+        this.img = Enemy.enemyList[listIdx][6];
 
-        this.abilities = [
+        this.abilities = Enemy.enemyList[listIdx][7];
+    }
+    static enemyList = [
+        ['Goblin', 5, 5, 15, 25, 25, 'images/goblin.png',[
             {name: 'Gobsmack',
             damage: 5},
 
             {name: 'Poison Arrow',
             damage: 10},
-        ];
-    }
+        ]],
+        ['Skeleton', 7, 7, 25, 40, 40, 'images/character.png',[
+            {name: 'Shamble Strike',
+            damage: 5},
+
+            {name: 'Bone Breaker',
+            damage: 10},
+        ]],
+        ['Lich', 10, 10, 30, 65, 65, 'images/character.png',[
+            {name: 'Spooky Blast',
+            damage: 10},
+
+            {name: 'Evil Beam',
+            damage: 15},
+        ]],
+    ]
 
     fight() {   // Uses a random ability and decreases player hp accordingly
         // Chose a random ability to fight with
