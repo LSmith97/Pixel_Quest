@@ -224,8 +224,9 @@ const atkEl = document.querySelector('#attack');
 const defEl = document.querySelector('#defense');
 const goldEl = document.querySelector('#gold');
 
-// XP bar element
-const xpEl = document.querySelector('#xp-bar p')
+// XP bar elements
+const xpValueEl = document.querySelector('#xp-bar .value')
+const xpTextEl = document.querySelector('#xp-bar-text')
 
 // encounter stat elements
 const typeEl = document.querySelector('#type');
@@ -323,7 +324,11 @@ function renderField() { // Renders the field, including score and message
 }
 
 function renderXP() { // Renders the XP bar
-    xpEl.textContent = `Current Level: ${player.level} - Current XP: ${player.xp} - To Next Level: ${player.level * XP_PER_LEVEL}`;
+    // Set the text bar's content
+    xpTextEl.textContent = `Current Level: ${player.level} - Current XP: ${player.xp} - To Next Level: ${player.level * XP_PER_LEVEL}`;
+    
+    // Make the value bar's size a % of the main bar's size based on current and max xp values
+    xpValueEl.style.width = `${player.xp/(player.level * XP_PER_LEVEL) * 100}%`;
 }
 
 function renderActions() { // Renders the action buttons

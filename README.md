@@ -11,7 +11,7 @@ A browser based RPG game.
 - HTML
 - CSS
 - JS
-- Art by: https://anokolisa.itch.io/
+- Includes art assets by: https://anokolisa.itch.io/
 
 ## Key Resources
 

@@ -99,16 +99,34 @@ header {
 #xp-bar {
     grid-area: xp;
 
-    background-color: rgb(255, 225, 0);
+    background-color: rgb(33, 33, 33); 
+    text-align: center;
 
     flex-direction: row;
-    justify-content: center;
+    position: relative;
+}
+
+#xp-bar-text {
+    font-size: 0.8em;
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+#xp-bar .value {
+    background-color: orange;
+    background-image: linear-gradient(to left, rgb(169, 110, 0), yellow);
+    justify-self: left;
+    align-self: left;
 }
 
 #player-stats {
     grid-area: stats;
 
     background-color: rgb(244, 165, 104);
+    
     border: 5px solid rgb(181, 115, 63);
 }
 
