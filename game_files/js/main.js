@@ -60,7 +60,7 @@ class Hero {
         // Change message
         message = `You used ${name}. ${encounter.name} took ${damage} damage!`
         // Play attack animation
-        heroImgEl.classList.add('attack');
+        renderAttack(heroImgEl);
         if(encounter.hp > 0){
             // If the enemy isn't defeated, they fight back
             encounter.fight();
@@ -76,8 +76,6 @@ class Hero {
             levelUp();
             // Set inCombat to false
             inCombat = false;
-            // Stop enemy attack animation
-            encounterImgEl.classList.remove('attack');
             //Render
             render();
         }
@@ -141,7 +139,7 @@ class Enemy {
 
     fight() {   // Uses a random ability and decreases player hp accordingly
         // Play attack animation
-        encounterImgEl.classList.add('attack')
+        renderAttack(encounterImgEl);
         // Chose a random ability to fight with
         let idx = Math.floor( Math.random() * encounter.abilities.length)
         let damage = encounter.abilities[idx]['damage'] - player.def + encounter.atk;
@@ -249,8 +247,6 @@ const resetBtn = document.querySelector('#reset-button');
   /*----- event listeners -----*/
 
 function findEncounter() { // Gets a new encounter instance
-    heroImgEl.classList.remove("attack");
-
     // Create a new encounter instance
     encounter = new Encounter;
 
@@ -382,6 +378,14 @@ function renderEncounter() { // Renders enemy stats
         enemyAtkEl.textContent = `Attack: ${encounter.atk}`;
         enemyDefEl.textContent = `Defense: ${encounter.def}`
     }
+}
+
+function renderAttack(element){
+    element.classList.add('attack');
+
+    setTimeout(function(){
+        element.classList.remove('attack');
+    },1200);
 }
 
 // Game state functions:
