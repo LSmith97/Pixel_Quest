@@ -1,172 +1,184 @@
 * {
-    box-sizing: border-box;
-    text-align: center;
-    font-family: 'Silkscreen', cursive;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: "Silkscreen", cursive;
 }
 
 .hidden {
-    display: none;
-    visibility: collapse;
+  display: none;
+  visibility: collapse;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
-    height: 90vmin;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  height: 90vmin;
+  gap: 5px;
 
-    background-color: rgb(33, 33, 33);
+  background-color: rgb(33, 33, 33);
 }
 
 header {
-    flex: 1;
-    width: 80%;
-    min-width: 750px;
+  flex: 1;
+  width: 80%;
+  min-width: 750px;
 
-    background-color: rgb(244, 165, 104);
-    border: 7px solid rgb(181, 115, 63);
+  background-color: rgb(244, 165, 104);
+  border: 7px solid rgb(181, 115, 63);
 }
 
 .field {
-    flex: 3;
-    width: 80%;
-    min-width: 750px;
+  flex: 3;
+  width: 80%;
+  min-width: 750px;
 
-    background-color: rgb(33, 33, 33);
-    background-image: url('../images/background.png');
-    background-position: left 0% bottom 5%;
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-color: rgb(33, 33, 33);
+  background-image: url("../images/background.png");
+  background-position: left 0% bottom 5%;
+  background-size: cover;
+  background-repeat: no-repeat;
 
-    display: grid;
-    grid-template: 
-    " . . score . . " .25fr
+  display: grid;
+  grid-template:
+    " . . score . . " 0.25fr
     " . hero . encounter . " 3fr
-    " message message message message message " .25fr
-    / .5fr 1fr 1fr 1fr .5fr; 
+    " message message message message message " 0.25fr
+    / 0.5fr 1fr 1fr 1fr 0.5fr;
 
-    color: white;
+  color: white;
 }
 
 #score {
-    grid-area: score;
+  grid-area: score;
 }
 
 #hero-container {
-    grid-area: hero;
+  grid-area: hero;
 }
 
 #encounter-container {
-    grid-area: encounter;
+  grid-area: encounter;
 }
 
-#hero-container.attack *{
-    animation-name: attack;
-    animation-duration: .5s;
+#hero-container.attack * {
+  animation-name: attack;
+  animation-duration: 0.5s;
 }
 
 @keyframes attack {
-   0% {transform: translate(0px, 0px)};
-   50% {transform: translate(400px, 10px)};
-   100% {transform: translate(0px, 0px)};
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(400px, 10px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
 }
 
 #encounter-container.attack * {
-    animation-name: enemy-attack;
-    animation-duration: .5s;
-    animation-delay: .6s;
+  animation-name: enemy-attack;
+  animation-duration: 0.5s;
+  animation-delay: 0.6s;
 }
 
 @keyframes enemy-attack {
-    0% {transform: translate(0px, 0px)};
-    50% {transform: translate(-400px, 10px)};
-    100% {transform: translate(0px, 0px)};
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(-400px, 10px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
 }
 
-.defeat img{
-    filter: grayscale();
+.defeat img {
+  filter: grayscale();
 }
 
 #message {
-    grid-area: message;
+  grid-area: message;
 }
 
 #score * {
-    margin: 10px 0 0 0;
+  margin: 10px 0 0 0;
 }
 #message * {
-    margin: 10px 0 10px 0;
-    letter-spacing: -.1em;
+  margin: 10px 0 10px 0;
+  letter-spacing: -0.1em;
 }
 .bottom {
-    flex: 2;
-    width: 80%;
-    min-width: 750px;
+  flex: 2;
+  width: 80%;
+  min-width: 750px;
 
-    background-color: rgb(122, 75, 39);
+  background-color: rgb(122, 75, 39);
 
-    padding: 10px;
-    display: grid;
-    gap: 5px;
-    grid-template: 
+  padding: 10px;
+  display: grid;
+  gap: 5px;
+  grid-template:
     " xp xp xp " 1fr
     " stats abilities encounter " 5fr
     / 1fr 1fr 1fr;
 }
 
 .bottom * {
-    display: flex;
-    flex-direction: column;
-    margin: 4px;
-    border-radius: 10px;;
+  display: flex;
+  flex-direction: column;
+  margin: 4px;
+  border-radius: 10px;
 }
 
 #xp-bar {
-    grid-area: xp;
+  grid-area: xp;
 
-    background-color: rgb(33, 33, 33); 
-    text-align: center;
+  background-color: rgb(33, 33, 33);
+  text-align: center;
 
-    flex-direction: row;
-    position: relative;
+  flex-direction: row;
+  position: relative;
 }
 
 #xp-bar-text {
-    font-size: 0.8em;
-    position: absolute;
-    text-align: center;
-    height: 100%;
-    width: 100%;
-    color: white;
+  font-size: 0.8em;
+  position: absolute;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  color: white;
 }
 
 #xp-bar .value {
-    background-color: orange;
-    background-image: linear-gradient(to left, rgb(169, 110, 0), yellow);
-    justify-self: left;
-    align-self: left;
+  background-color: orange;
+  background-image: linear-gradient(to left, rgb(169, 110, 0), yellow);
+  justify-self: left;
+  align-self: left;
 }
 
 #player-stats {
-    grid-area: stats;
+  grid-area: stats;
 
-    background-color: rgb(244, 165, 104);
-    
-    border: 5px solid rgb(181, 115, 63);
+  background-color: rgb(244, 165, 104);
+
+  border: 5px solid rgb(181, 115, 63);
 }
 
 #actions {
-    grid-area: abilities;
+  grid-area: abilities;
 
-    background-color: rgb(244, 165, 104);
-    border: 5px solid rgb(181, 115, 63);
+  background-color: rgb(244, 165, 104);
+  border: 5px solid rgb(181, 115, 63);
 }
 
 #enemy-stats {
-    grid-area: encounter;
+  grid-area: encounter;
 
-    background-color: rgb(244, 165, 104);
-    border: 5px solid rgb(181, 115, 63);
+  background-color: rgb(244, 165, 104);
+  border: 5px solid rgb(181, 115, 63);
 }
