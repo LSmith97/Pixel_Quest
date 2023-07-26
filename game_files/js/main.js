@@ -330,9 +330,14 @@ function renderField() { // Renders the field, including score and message
         encounterImgEl.classList.remove('hidden');
     }
     // Render Encounter image
-    encounterImgEl.innerHTML = `<img src="${encounter.img}">`
+    encounterImgEl.innerHTML = `<img src="${encounter.img}">`;
     // Render Hero image
-    heroImgEl.innerHTML = `<img src="images/character.png" alt="player">`
+    heroImgEl.innerHTML = `<img src="images/character.png" alt="player">`;
+    if(isGameOver){
+        heroImgEl.classList.add('defeat');
+    } else {
+        heroImgEl.classList.remove('defeat');
+    }
 }
 
 function renderXP() { // Renders the XP bar

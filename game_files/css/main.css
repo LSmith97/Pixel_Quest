@@ -85,6 +85,10 @@ header {
     100% {transform: translate(0px, 0px)};
 }
 
+.defeat img{
+    filter: grayscale();
+}
+
 #message {
     grid-area: message;
 }
