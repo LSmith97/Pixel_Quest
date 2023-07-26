@@ -285,7 +285,7 @@ function init() { //Initializes the starting game state
     inCombat = false;
     isGameOver = false;
     encounter = {type: 'none'};
-    heroImgEl.classList.remove('defeated');
+    clickAudio.playbackRate = 2;
 
     // add event listeners to buttons
     abilityBtns.forEach(function(element){

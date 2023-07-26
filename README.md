@@ -12,6 +12,7 @@ A browser based RPG game.
 - CSS
 - JS
 - Includes art assets by: https://anokolisa.itch.io/
+- Sound effects from: https://mixkit.co/
 
 ## Key Resources
 
@@ -23,8 +24,7 @@ instructions for accessing the deployed game
 
 ## Future Features
 
-1. Audio on ability usage
-2. Background music
-3. Additional player classes with different abilities
-4. Adding the ability to spend gold
-5. Expanding the enemy and encounter lists
+1. Background music
+2. Additional player classes with different abilities
+3. Adding the ability to spend gold
+4. Expanding the enemy and encounter lists
