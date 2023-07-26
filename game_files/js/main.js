@@ -208,6 +208,7 @@ const MAX_STAT_PER_LEVEL = 3;
 
 const gameOverAudio = new Audio('audio/mixkit-arcade-retro-game-over-213.wav');
 const clickAudio = new Audio('audio/mixkit-interface-device-click-2577.wav');
+const levelUpAudio = new Audio('audio/mixkit-game-flute-bonus-2313.wav');
 
   /*----- state variables -----*/
 
@@ -401,6 +402,8 @@ function renderAttack(element){ // Handles attack animations
 // Game state functions:
 function levelUp(){ // If the player has enough XP to level up, increase their stats and reset xp to 0
     if (player.xp >= player.level * XP_PER_LEVEL){
+        // play level up sound
+        levelUpAudio.play();
         //reset xp and increase level
         player.xp = 0;
         player.level++;
