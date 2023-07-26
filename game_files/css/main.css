@@ -62,6 +62,29 @@ header {
     grid-area: encounter;
 }
 
+#hero-container.attack *{
+    animation-name: attack;
+    animation-duration: .5s;
+}
+
+@keyframes attack {
+   0% {transform: translate(0px, 0px)};
+   50% {transform: translate(400px, 10px)};
+   100% {transform: translate(0px, 0px)};
+}
+
+#encounter-container.attack * {
+    animation-name: enemy-attack;
+    animation-duration: .5s;
+    animation-delay: .6s;
+}
+
+@keyframes enemy-attack {
+    0% {transform: translate(0px, 0px)};
+    50% {transform: translate(-400px, 10px)};
+    100% {transform: translate(0px, 0px)};
+}
+
 #message {
     grid-area: message;
 }
