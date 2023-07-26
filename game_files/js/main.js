@@ -39,6 +39,8 @@ class Hero {
         let cost = player.abilities[idx]['cost'];
         let name = player.abilities[idx]['name'];
 
+        // Play click sound
+        clickAudio.play();
         // If the mana cost is greater than current mana, display a message and return
         if (cost > player.mana) {
             message = "You don't have enough mana to use that!"
@@ -164,7 +166,7 @@ class Encounter{
             case (encounterRoll < 50):
                 this.type = 'enemy';
                 break;
-            case (encounterRoll >= 50 && encounterRoll < 60):
+            case (encounterRoll >= 50 && encounterRoll < 65):
                 this.type = 'Inn';
                 this.message = "You find a place to rest and recover. HP and Mana refreshed!";
                 this.img = "images/inn.png";
@@ -173,7 +175,7 @@ class Encounter{
                     player.mana = player.maxMana;
                 };
                 break;
-            case (encounterRoll >= 60 && encounterRoll < 70):
+            case (encounterRoll >= 65 && encounterRoll < 75):
                 this.type = "Pitfall";
                 this.message = "You fell into a trap! You took 5 damage!";
                 this.img = "images/pitfall.png";
@@ -181,7 +183,7 @@ class Encounter{
                     player.hp -= 5;
                 };
                 break;
-            case (encounterRoll >= 80 && encounterRoll < 95):
+            case (encounterRoll >= 75 && encounterRoll < 95):
                 this.type = "Teasure";
                 this.message = "You found a chest with some treasure in it. Gold +5!";
                 this.img = "images/chest.png";
@@ -203,6 +205,9 @@ class Encounter{
 
 const XP_PER_LEVEL = 50;
 const MAX_STAT_PER_LEVEL = 3;
+
+const gameOverAudio = new Audio('audio/mixkit-arcade-retro-game-over-213.wav');
+const clickAudio = new Audio('audio/mixkit-interface-device-click-2577.wav');
 
   /*----- state variables -----*/
 
@@ -247,9 +252,10 @@ const resetBtn = document.querySelector('#reset-button');
   /*----- event listeners -----*/
 
 function findEncounter() { // Gets a new encounter instance
+    // play click sound
+    clickAudio.play();
     // Create a new encounter instance
     encounter = new Encounter;
-
     // If that encounter is an enemy, create a new Enemy instance and enter combat
     if(encounter.type === 'enemy'){
         inCombat = true;
@@ -279,6 +285,7 @@ function init() { //Initializes the starting game state
     inCombat = false;
     isGameOver = false;
     encounter = {type: 'none'};
+    heroImgEl.classList.remove('defeated');
 
     // add event listeners to buttons
     abilityBtns.forEach(function(element){
@@ -380,12 +387,15 @@ function renderEncounter() { // Renders enemy stats
     }
 }
 
-function renderAttack(element){
+function renderAttack(element){ // Handles attack animations
+    // Stop any ongoing animations
+    element.classList.remove('attack');
+    // Play attack animation
     element.classList.add('attack');
-
+    // After a delay, remove the animation
     setTimeout(function(){
         element.classList.remove('attack');
-    },1200);
+    },1100);
 }
 
 // Game state functions:
@@ -408,7 +418,8 @@ function levelUp(){ // If the player has enough XP to level up, increase their s
 
 function gameOver(){ // Determines if the player has been defeated
     if (player.hp <= 0){
-        message += " Your hp is 0!"
+        message += " You died!"
         isGameOver = true;
-    }
+        gameOverAudio.play();
+    } 
 }
