@@ -82,19 +82,19 @@ class Hero {
     clickAudio.play();
     // If the player has no potions, display a message and return
     if (player.potions <= 0) {
-      message = "You don't have any potions."
+      message = "You don't have any potions.";
       render();
       return;
     }
     // If the player already has full HP, display a message
     if (player.hp === player.maxHP) {
-      message = "Your HP is already full."
+      message = "Your HP is already full.";
       render();
       return;
     }
     // Increment the player's HP, up to the maximum
     player.hp += 10;
-    if(player.hp > player.maxHP) player.hp = player.maxHP;
+    if (player.hp > player.maxHP) player.hp = player.maxHP;
     // Decrement the number of potions
     player.potions--;
     // Display a message
@@ -212,7 +212,7 @@ class Encounter {
         this.message =
           "You find a place to rest and recover. Your mana was refreshed";
         this.img = "game_files/images/inn.png";
-        this.effect = function() {
+        this.effect = function () {
           player.mana = player.maxMana;
         };
         break;
@@ -220,7 +220,7 @@ class Encounter {
         this.type = "Pitfall";
         this.message = "You fell into a trap! You took 5 damage!";
         this.img = "game_files/images/pitfall.png";
-        this.effect = function() {
+        this.effect = function () {
           player.hp -= 5;
         };
         break;
@@ -228,7 +228,7 @@ class Encounter {
         this.type = "Teasure";
         this.message = "You found a chest with some treasure in it. Gold +5!";
         this.img = "game_files/images/chest.png";
-        this.effect = function() {
+        this.effect = function () {
           player.gold += 5;
         };
         break;
@@ -237,7 +237,7 @@ class Encounter {
         this.message =
           "You found a rare and powerful weapon in a chest. Your attack was increased";
         this.img = "game_files/images/chest.png";
-        this.effect = function() {
+        this.effect = function () {
           player.atk += 2;
         };
         break;
@@ -248,9 +248,15 @@ class Encounter {
 const XP_PER_LEVEL = 50;
 const MAX_STAT_PER_LEVEL = 3;
 
-const gameOverAudio = new Audio("game_files/audio/mixkit-arcade-retro-game-over-213.wav");
-const clickAudio = new Audio("game_files/audio/mixkit-interface-device-click-2577.wav");
-const levelUpAudio = new Audio("game_files/audio/mixkit-game-flute-bonus-2313.wav");
+const gameOverAudio = new Audio(
+  "game_files/audio/mixkit-arcade-retro-game-over-213.wav"
+);
+const clickAudio = new Audio(
+  "game_files/audio/mixkit-interface-device-click-2577.wav"
+);
+const levelUpAudio = new Audio(
+  "game_files/audio/mixkit-game-flute-bonus-2313.wav"
+);
 
 /*----- state variables -----*/
 
@@ -320,19 +326,23 @@ function findEncounter() {
 }
 
 function rest() {
+  // play click sound
+  clickAudio.play();
   // Display a message if player doesn't have enough gold
   if (player.gold < 25) {
     message = "You Don't have enough gold to rest here";
     render();
     return;
   }
-  message = "You rest at the Inn. Your HP is refreshed!"
+  message = "You rest at the Inn. Your HP is refreshed!";
   player.hp = player.maxHP;
   player.gold -= 25;
   render();
 }
 
 function buy() {
+  // play click sound
+  clickAudio.play();
   // Display a message if player doesn't have enough gold
   if (player.gold < 50) {
     message = "You Don't have enough gold to buy that";
@@ -341,7 +351,7 @@ function buy() {
   }
   player.gold -= 50;
   player.potions++;
-  message = `You bought a potion! You now have ${player.potions}`
+  message = `You bought a potion! You now have ${player.potions}`;
   render();
 }
 
@@ -370,11 +380,11 @@ function init() {
 
   resetBtn.addEventListener(`click`, init);
 
-  restBtn.addEventListener('click', rest);
+  restBtn.addEventListener("click", rest);
 
-  purchaseBtn.addEventListener('click', buy);
+  purchaseBtn.addEventListener("click", buy);
 
-  potionBtn.addEventListener('click', player.usePotion);
+  potionBtn.addEventListener("click", player.usePotion);
 
   // Render state to the page
   render();
@@ -442,7 +452,7 @@ function renderActions() {
     resetBtn.classList.add("hidden");
     // Display the potion button
     potionBtn.textContent = `Use a Potion: +10 hp. You have: ${player.potions}`;
-    potionBtn.classList.remove('hidden');
+    potionBtn.classList.remove("hidden");
     if (!inCombat) {
       // when not in combat, show the find encounter button and hide the ability buttons
       abilityBtns.forEach(function (element) {
@@ -475,18 +485,18 @@ function renderEncounter() {
   // If the encounter isn't an enemy, hide the other stats. Otherwise, display all stats
   if (encounter.type !== "enemy") {
     typeEl.textContent = `${encounter.type}`;
-    enemyHpEl.classList.add('hidden');
-    enemyAtkEl.classList.add('hidden');
-    enemyDefEl.classList.add('hidden');
+    enemyHpEl.classList.add("hidden");
+    enemyAtkEl.classList.add("hidden");
+    enemyDefEl.classList.add("hidden");
     typeEl.textContent = "";
     enemyHpEl.textContent = "";
     enemyAtkEl.textContent = "";
     enemyDefEl.textContent = "";
   } else {
     // unhide stats
-    enemyHpEl.classList.remove('hidden');
-    enemyAtkEl.classList.remove('hidden');
-    enemyDefEl.classList.remove('hidden');
+    enemyHpEl.classList.remove("hidden");
+    enemyAtkEl.classList.remove("hidden");
+    enemyDefEl.classList.remove("hidden");
     // Update contents
     typeEl.textContent = `Name: ${encounter.name}`;
     enemyHpEl.textContent = `Health: ${encounter.hp}/${encounter.maxHP}`;
@@ -495,11 +505,11 @@ function renderEncounter() {
   }
   // If the encounter is an Inn, show the purchase buttons. Otherwise, hide them.
   if (encounter.type === "Inn") {
-    purchaseBtn.classList.remove('hidden');
-    restBtn.classList.remove('hidden');
+    purchaseBtn.classList.remove("hidden");
+    restBtn.classList.remove("hidden");
   } else {
-    purchaseBtn.classList.add('hidden');
-    restBtn.classList.add('hidden');
+    purchaseBtn.classList.add("hidden");
+    restBtn.classList.add("hidden");
   }
 }
 

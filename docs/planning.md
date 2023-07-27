@@ -2,7 +2,7 @@
 
 ## Game Choice
 
-A simple brower RPG a la classic final fantasy games, minus the overworld (so just encounter to encounter)
+Pixel Quest: a simple brower RPG a la classic final fantasy games, minus the overworld (so just encounter to encounter)
 
 ## Wireframe
 Mock Up:
@@ -13,7 +13,6 @@ Html:
 
 ## Psuedocode
 
-```
 1) Define required constants
     1.a) Define Hero and Enemy class
     1.b) Define a list of possible encounters
@@ -33,13 +32,14 @@ Html:
     4,c) Render
     4.d) Wait for the player to click the next encounter button
 
-6) when initCombat() starts, create a new Enemy object 
-    6.a) Render the new enemy on the page and some encounter message
-    6.b) Wait for the player to click an ability button to fight()
+6) when initCombat() starts:
+    6.a) Create a new Enemy object 
+    6.b) Render the new enemy on the page and some encounter message
+    6.c) Wait for the player to click an ability button to fight()
     
 
-7) when the player clicks an ability, fight() to reduce enemy hp
-    7.a) the enemy randomly picks an attack to fight() with
+7) When the player clicks an ability, fight() to reduce enemy hp
+    7.a) The enemy randomly picks an attack to fight() with
     7.b) If the enemy hp reaches 0, increase player XP and gold.
         7.b) wait for the player to click find Encounter
     7.c) if player xp reaches max, levelup() increase player stats, display level up message then render
