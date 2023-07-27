@@ -115,7 +115,7 @@ class Enemy {
       15,
       25,
       25,
-      "images/goblin.png",
+      "game_files/images/goblin.png",
       [
         { name: "Gobsmack", damage: 5 },
 
@@ -129,7 +129,7 @@ class Enemy {
       25,
       50,
       50,
-      "images/skeleton.png",
+      "game_files/images/skeleton.png",
       [
         { name: "Shamble Strike", damage: 10 },
 
@@ -143,7 +143,7 @@ class Enemy {
       40,
       100,
       100,
-      "images/lich.png",
+      "game_files/images/lich.png",
       [
         { name: "Spooky Blast", damage: 15 },
 
@@ -185,7 +185,7 @@ class Encounter {
         this.type = "Inn";
         this.message =
           "You find a place to rest and recover. HP and Mana refreshed!";
-        this.img = "images/inn.png";
+        this.img = "game_files/images/inn.png";
         this.effect = function () {
           player.hp = player.maxHP;
           player.mana = player.maxMana;
@@ -194,7 +194,7 @@ class Encounter {
       case encounterRoll >= 65 && encounterRoll < 75:
         this.type = "Pitfall";
         this.message = "You fell into a trap! You took 5 damage!";
-        this.img = "images/pitfall.png";
+        this.img = "game_files/images/pitfall.png";
         this.effect = function () {
           player.hp -= 5;
         };
@@ -202,7 +202,7 @@ class Encounter {
       case encounterRoll >= 75 && encounterRoll < 95:
         this.type = "Teasure";
         this.message = "You found a chest with some treasure in it. Gold +5!";
-        this.img = "images/chest.png";
+        this.img = "game_files/images/chest.png";
         this.effect = function () {
           player.gold += 5;
         };
@@ -211,7 +211,7 @@ class Encounter {
         this.type = "Rare Weapon";
         this.message =
           "You found a rare and powerful weapon in a chest. Your attack was increased";
-        this.img = "images/chest.png";
+        this.img = "game_files/images/chest.png";
         this.effect = function () {
           player.atk += 2;
         };
@@ -223,9 +223,9 @@ class Encounter {
 const XP_PER_LEVEL = 50;
 const MAX_STAT_PER_LEVEL = 3;
 
-const gameOverAudio = new Audio("audio/mixkit-arcade-retro-game-over-213.wav");
-const clickAudio = new Audio("audio/mixkit-interface-device-click-2577.wav");
-const levelUpAudio = new Audio("audio/mixkit-game-flute-bonus-2313.wav");
+const gameOverAudio = new Audio("game_files/audio/mixkit-arcade-retro-game-over-213.wav");
+const clickAudio = new Audio("game_files/audio/mixkit-interface-device-click-2577.wav");
+const levelUpAudio = new Audio("game_files/audio/mixkit-game-flute-bonus-2313.wav");
 
 /*----- state variables -----*/
 
@@ -354,7 +354,7 @@ function renderField() {
   // Render Encounter image
   encounterImgEl.innerHTML = `<img src="${encounter.img}">`;
   // Render Hero image
-  heroImgEl.innerHTML = `<img src="images/character.png" alt="player">`;
+  heroImgEl.innerHTML = `<img src="game_files/images/character.png" alt="player">`;
   if (isGameOver) {
     heroImgEl.classList.add("defeat");
   } else {
