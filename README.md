@@ -4,7 +4,13 @@ A simple yet engaging browser-based RPG game.
 
 ## Gameplay - Screenshots
 
-![screenshot](/assets/screenshot.png)
+Encounters:
+
+![screenshot1](assets/screenshot1.PNG)
+
+Combat:
+
+![screenshot2](assets/screenshot2.PNG)
 
 ## Technologies Used
 
