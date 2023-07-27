@@ -1,6 +1,6 @@
 # Pixel Quest
 
-A browser based RPG game. 
+A simple yet engaging browser-based RPG game. 
 
 ## Gameplay - Screenshots
 
@@ -17,10 +17,14 @@ A browser based RPG game.
 ## Key Resources
 
 [Planning](/docs/planning.md)
+[Pages](https://lsmith97.github.io/Pixel_Quest/)
 
 ## Getting Started
 
-instructions for accessing the deployed game
+-To get started, click on the link above to the github pages site. or click [here](https://lsmith97.github.io/Pixel_Quest/)
+-To start your adventure, press the "Find Encounter" button to venture forward
+-There are several different types of encounters, each with their own effects
+-In combat, click the ability buttons to defeat your opponent
 
 ## Future Features
 
