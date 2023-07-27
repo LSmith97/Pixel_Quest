@@ -158,7 +158,6 @@ header {
   background-color: orange;
   background-image: linear-gradient(to left, rgb(169, 110, 0), yellow);
   justify-self: left;
-  align-self: left;
 }
 
 #player-stats {
