@@ -1,6 +1,6 @@
 # Pixel Quest
 
-A simple yet engaging browser-based RPG game.
+A simple yet engaging browser-based RPG game. Level up and grow stronger to fight ever more powerful enemies
 
 ## Gameplay - Screenshots
 
